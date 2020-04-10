@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="bg elegant-color">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header" th:text="${titulo}"></div>
+					<div class="card-body">
+
+						<!-- Modal Nuevo/Editar -->
+
+						<form th:action="@{/torneo/form}" th:object="${torneo}" method="post" enctype="multipart/form-data" class="md-form" id="formulario">
+							<div class="form-group row">
+								<div class="col-sm-5">
+									<img class="img-thumbnail img-fluid" th:if="${#strings.length(torneo.foto) > 0}" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
+								
+									<input id="input-id" type="file" name="file" class="file" data-preview-file-type="text" >
+								</div>
+								<div class="col-sm-7">
+									<div class="md-form m-0">
+										<i class="fas fa-envelope prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control mb-3"> <label for="defaultForm-text">Título</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fecha}"  id="fecha" class="form-control mb-3"> <label for="defaultForm-text">Fecha</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="far fa-clock prefix grey-text"></i> <input type="text" th:field="*{hora}" id="hora" class="form-control mb-3"> <label for="defaultForm-text">Hora</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="fas fa-map-marker-alt prefix grey-text"></i> <input type="text" th:field="*{lugar}" id="lugar" class="form-control mb-3"> <label for="defaultForm-text">Lugar</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="fa fa-trophy prefix grey-text"></i> <input type="text" th:field="*{premio}" id="premio" class="form-control mb-3"> <label for="defaultForm-text">Premio</label>
+									</div>
+
+									<div class="md-form">
+										<i class="fas fa-pencil-alt prefix grey-text"></i>
+										<textarea id="torneoDescripcion" th:field="*{descripcion}" class="md-textarea form-control mb-3" rows="2"></textarea>
+										<label for="torneoDescripcion">Descripción</label>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer d-flex justify-content-center">
+								<button id="btnGuardar" class="btn btn-default" onclick="submit">Guardar</button>
+								<button id="btnBorrar" type="reset" class="btn btn-default">Limpiar</button>
+							</div>
+							
+							<input type="hidden" th:field="*{id}">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<footer th:replace="layout/layout :: footer"></footer>
+
+	
+</body>
+</html>

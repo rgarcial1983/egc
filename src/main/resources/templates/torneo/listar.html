@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="bg elegant-color">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<form class="form-inline" th:action="@{/buscarTorneo}" id="buscarTorneo">
+	      <div class="md-form my-0">
+	        <input autofocus="autofocus" class="form-control mr-sm-2" type="text" name="q" id="myFilter" th:placeholder="${param.q}" aria-label="Buscar">
+	      </div>
+	    </form>
+		<!-- Row -->
+		<div class="row" id="myItems">
+			<div th:each="torneo: ${torneos}" class="col-md-4 mb-4">
+				<!-- Card -->
+				<div class="card h-100">
+					<!-- Card image -->
+					<div class="view overlay">
+						<!--  <img class="card-img-top" th:src="@{${torneo.foto}}" alt="Imagen torneo"> -->
+						<img th:if="${torneo.foto != null && #strings.length(torneo.foto) > 0}" class="card-img-top img-fluid" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
+					</div>
+
+					<!-- Card content -->
+					<div class="card-body d-flex flex-column">
+						<!-- Nombre -->
+						<div>
+							<h3 class="card-title" th:text=${torneo.nombre}></h3>
+						</div>
+						<!-- Fecha y hora -->
+						<div >
+							<i class="fas fa-calendar-alt fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${#dates.format(torneo.fecha, 'dd/MM/yyyy')}"></span> <i class="far fa-clock fa-1x fa-fw"
+								style="color: #b80f22;"></i> <span class="card-text" th:text="${#dates.format(torneo.hora, 'HH:mm')}"></span>
+						</div>
+						<!-- Lugar -->
+						<div>
+							<i class="fas fa-map-marker-alt fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${torneo.lugar}"></span>
+						</div>
+						<!-- Premios -->
+						<div>
+							<i class="fa fa-trophy fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${torneo.premio}"></span>
+						</div>
+						<div>
+							<!-- Descripcion -->
+							<hr>
+							<span class="card-text" th:text="${torneo.descripcion}"></span>
+						</div>
+						<!-- Button -->
+						<div class="mt-auto text-center">
+							<a href="" class="btn elegant-color-dark text-warning">Inscribirse</a>
+						</div>
+						<div class="mt-auto text-center">
+							<a id="btnNuevo" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo}">
+								<i class="fas fa-plus-circle fa-fw " style="color: #b80f22;"></i>
+							</a>
+							<a id="btnEliminar" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo/eliminar/} + ${torneo.id}"
+							onclick="return confirm('¿Seguro que quieres eliminar el torneo?');">
+								<i class="far fa-trash-alt fa-fw " style="color: #b80f22;"></i>
+							</a>
+							<a id="btnEditar" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo/} + ${torneo.id}">
+								<i class="far fa-edit fa-fw " style="color: #b80f22;"></i>
+							</a>
+						</div>
+					</div>
+
+				</div>
+				<!-- Card -->
+			</div>
+		</div>
+		
+		
+		
+	</div>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+	<script type="text/javascript">	
+        $(document).ready(function() {
+            
+            if($("#myFilter").attr("placeholder") == '' || $("#myFilter").attr("placeholder")==undefined) {    	
+                $("#myFilter").attr("placeholder", "Buscar...");
+            }
+
+        });
+	</script>
+</body>
+</html>
