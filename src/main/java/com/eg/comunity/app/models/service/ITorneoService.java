@@ -9,7 +9,7 @@ import com.eg.comunity.app.models.entity.Torneo;
 
 public interface ITorneoService {
 
-	public List<Torneo> findAll();
+	public List<Torneo> findAllByOrderByFechaDesc();
 	
 	public Page<Torneo> findAll(Pageable pageable);
 

@@ -37,7 +37,7 @@ public class TorneoController {
 	@RequestMapping(value = {"torneo/listar"}, method = RequestMethod.GET)
 	public String listarTorneos(Model model) {
 		
-		List<Torneo> torneos = torneoService.findAll();
+		List<Torneo> torneos = torneoService.findAllByOrderByFechaDesc();
 		model.addAttribute("torneos", torneos);
 		
 		return "torneo/listar";
@@ -103,8 +103,6 @@ public class TorneoController {
 
 			flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 			torneo.setFoto(uniqueFilename);
-		} else {
-			torneo.setFoto("nodisponible.png");
 		}
 		
 		String mensajeFlash = (torneo.getId() != null) ? "Torneo editado con éxito!" : "Torneo creado con éxito!";

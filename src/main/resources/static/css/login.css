@@ -67,7 +67,7 @@ body {
   background: #b80f22;
   color: #fff;
   font-size: 18px;
-  border-radius: 20px;
+  border-radius: 2px;
 }
 
 .login-box input[type="submit"]:hover {
@@ -85,4 +85,15 @@ body {
 
 .login-box a:hover {
   color: #fff;
+}
+
+.btn-eg {
+  background: #b80f22 !important;
+  color: #fff !important;
+}
+
+.btn-eg:hover {
+  cursor: pointer;
+  background: #ffc107 !important;
+  color: #000 !important;
 }

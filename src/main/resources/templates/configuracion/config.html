@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="bg elegant-color">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<span th:text="${titulo}"></span>
+						<a class="close" aria-label="Close" th:href="@{'/torneo/listar'}">
+							<span aria-hidden="true">×</span>
+						</a>
+					</div>
+					<div class="card-body">
+
+						<!-- Modal Nuevo/Editar -->
+
+						<form th:action="@{/configuracion/edit}" th:object="${config}" method="post" enctype="multipart/form-data" class="md-form" id="formulario">
+							<div class="form-group row">
+								
+								<div class="col-sm-12">
+									<div class="md-form m-0">
+										<i class="fas fa-home prefix grey-text"></i> <input type="text" th:field="*{direccion}" id="direccion" class="form-control mb-3"> <label for="defaultForm-text">Dirección Asociación</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="fas fa-envelope prefix grey-text"></i> <input type="text" th:field="*{email}"  id="email" class="form-control mb-3"> <label for="defaultForm-text">Email Contacto</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="fas fa-phone prefix grey-text"></i> <input type="text" th:field="*{telefono}" id="telefono" class="form-control mb-3"> <label for="defaultForm-text">Telefono</label>
+									</div>
+
+									<div class="md-form m-0">
+										<i class="far fa-clock prefix grey-text"></i> <input type="text" th:field="*{horario}" id="horario" class="form-control mb-3"> <label for="defaultForm-text">Horario</label>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer d-flex justify-content-center">
+								<button id="btnGuardar" class="btn btn-eg" onclick="submit">Guardar</button>
+								<button id="btnBorrar" type="reset" class="btn btn-eg">Limpiar</button>
+							</div>
+							
+							<input type="hidden" th:field="*{id}">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<footer th:replace="layout/layout :: footer"></footer>
+	</div>
+	
+</body>
+</html>

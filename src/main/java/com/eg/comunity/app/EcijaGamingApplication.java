@@ -26,7 +26,7 @@ public class EcijaGamingApplication implements CommandLineRunner {
 		//uploadFileService.deleteAll();
 		//uploadFileService.init();
 		
-		String password = "12345";
+		String password = "admin";
 		
 		for(int i=0; i<3; i++) {
 			String bcryptPassword = passwordEncoder.encode(password);

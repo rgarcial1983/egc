@@ -2,16 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head">
 </head>
-<body class="bg elegant-color">
+<body class="bg grey darken-1">
 
 	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container py-4">
-		<form class="form-inline" th:action="@{/buscarTorneo}" id="buscarTorneo">
-	      <div class="md-form my-0">
-	        <input autofocus="autofocus" class="form-control mr-sm-2" type="text" name="q" id="myFilter" th:placeholder="${param.q}" aria-label="Buscar">
-	      </div>
-	    </form>
+	<div class="container py-2">
+		<div class="row">
+			<div class="md-form my-0 col-md-9">
+				<form class="form-inline" th:action="@{/buscarTorneo}" id="buscarTorneo">
+					<input autofocus="autofocus" class="form-control mr-sm-2 text-white" type="text" name="q" id="myFilter" th:placeholder="${param.q}" aria-label="Buscar">
+				</form>
+			</div>
+			<div class="md-form my-0 col-md-3">
+				<a id="btnNuevoArriba" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo}"> 
+					<i class="fa fa-gamepad fa-1x fa-fw" ></i>  Nuevo Torneo
+				</a>
+			</div>
+		</div>
 		<!-- Row -->
 		<div class="row" id="myItems">
 			<div th:each="torneo: ${torneos}" class="col-md-4 mb-4">
@@ -19,7 +26,7 @@
 				<div class="card h-100">
 					<!-- Card image -->
 					<div class="view overlay">
-						<!--  <img class="card-img-top" th:src="@{${torneo.foto}}" alt="Imagen torneo"> -->
+						<!--  <img class="card-img-top img-fluid" th:src="@{${torneo.foto}}" alt="Imagen torneo"> -->
 						<img th:if="${torneo.foto != null && #strings.length(torneo.foto) > 0}" class="card-img-top img-fluid" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
 					</div>
 
@@ -48,10 +55,10 @@
 							<span class="card-text" th:text="${torneo.descripcion}"></span>
 						</div>
 						<!-- Button -->
-						<div class="mt-auto text-center">
-							<a href="" class="btn elegant-color-dark text-warning">Inscribirse</a>
+						<div class="mt-auto text-center" th:if="${torneo.url != null && torneo.url != ''}">
+							<a th:href="@{${'' + torneo.url}}" th:target="_blank" class="btn btn-eg"><img alt="Inscríbete" th:src="@{/icons/discord.svg}" height="30px">Inscribirse</a>
 						</div>
-						<div class="mt-auto text-center">
+						<div class="mt-auto text-center" sec:authorize="hasRole('ROLE_ADMIN')">
 							<a id="btnNuevo" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo}">
 								<i class="fas fa-plus-circle fa-fw " style="color: #b80f22;"></i>
 							</a>
@@ -69,13 +76,12 @@
 				<!-- Card -->
 			</div>
 		</div>
-		
-		
-		
+				
+	<footer th:replace="layout/layout :: footer"></footer>
+	
 	</div>
 
 
-	<footer th:replace="layout/layout :: footer"></footer>
 
 	<script type="text/javascript">	
         $(document).ready(function() {
@@ -84,7 +90,19 @@
                 $("#myFilter").attr("placeholder", "Buscar...");
             }
 
+	        if ($("#mensajeSuccess").is(':visible')){
+	            var mensaje = $("#mensajeSuccess").html();
+	            console.log(mensaje);
+	            if(mensaje != undefined && mensaje != "") {            	
+	            	swal(mensaje, 
+	            		 "", 
+	            		 "success");
+	            }
+	        }
+        
         });
+        
+        
 	</script>
 </body>
 </html>

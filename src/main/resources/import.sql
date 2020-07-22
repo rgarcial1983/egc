@@ -46,22 +46,36 @@ INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
 
 
 /* Creamos algunos usuarios con sus roles */
-INSERT INTO users (username, password, enabled) VALUES ('rafa','$2a$10$O9wxmH/AeyZZzIS09Wp8YOEMvFnbRVJ8B4dmAMVSGloR62lj.yqXG',1);
-INSERT INTO users (username, password, enabled) VALUES ('admin','$2a$10$DOMDxjYyfZ/e7RcBfUpzqeaCs8pLgcizuiQWXPkU35nOhZlFcE9MS',1);
-INSERT INTO users (username, password, enabled) VALUES ('user','$2a$10$JZqKVaAiiYdkVyg4rrxZ0OoEVVMfoSFDAIw8fmBIN2s9wGwUYuzfS',1);
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('rafa','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'rafa', 'García', 'León', 'rafa@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('admin','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe',1, 'admin', 'admin', 'admin', 'admin@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('user','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'user', 'User', 'User', 'user@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('pepe','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'user2', 'User2', 'User2', 'user2@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('juan','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'user3', 'User3', 'User3', 'user3@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('rosa','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'user4', 'User4', 'User4', 'user4@correo.es', '1983-06-16');
+INSERT INTO users (username, password, enabled, nombre, apellido1, apellido2, email, fh_nacimiento) VALUES ('luis','$2a$10$YxYo8dU5lp8gV5XVh.2RteH1AMy0NFuMzGQ0M0dQtgKRt25vGsQLe', 1, 'user5', 'User5', 'User5', 'user5@correo.es', '1983-06-16');
 
 INSERT INTO authorities (user_id, authority) VALUES (1,'ROLE_USER');
 INSERT INTO authorities (user_id, authority) VALUES (2,'ROLE_ADMIN');
 INSERT INTO authorities (user_id, authority) VALUES (3,'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (4,'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (5,'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (6,'ROLE_USER');
+INSERT INTO authorities (user_id, authority) VALUES (7,'ROLE_USER');
 
 /* Cargamo la tabla de torneos*/
-INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto) VALUES ('Quake Arena', 'Descripción del torneo de Quake Arena. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-02-20', '15:00', 'Asociación EG', '50€ Primer equipo, 20€ Segundo equipo', 'quake.jpg');
-INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto) VALUES ('Unreal Tournament', 'Descripción del torneo de Unrel Tournament. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-04-16', '18:00', 'Online', '50€ Primer equipo, 20€ Segundo equipo', 'unreal.jpg');
-INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto) VALUES ('Fornite', 'Descripción del torneo de Fornite. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-07-16', '20:00', 'Asociación EG', '500€ Primer equipo, 20€ Segundo equipo', 'fornite.jpg');
-INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto) VALUES ('FIFA 2020', 'Descripción del torneo de Fifa 2020. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-07-16', '20:00', 'Asociación EG', '500€ Primer equipo, 20€ Segundo equipo', 'fifa.jpg');
+INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto, url) VALUES ('Quake Arena', 'Descripción del torneo de Quake Arena. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-02-20', '15:00', 'Asociación EG', '50€ Primer equipo, 20€ Segundo equipo', 'quake.jpg', 'https://discord.gg/ByDAHZ3');
+INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto, url) VALUES ('Unreal Tournament', 'Descripción del torneo de Unrel Tournament. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-04-16', '18:00', 'Online', '50€ Primer equipo, 20€ Segundo equipo', 'unreal.jpg', 'https://discord.gg/ByDAHZ3');
+INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto, url) VALUES ('Fornite', 'Descripción del torneo de Fornite. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-07-16', '20:00', 'Asociación EG', '500€ Primer equipo, 20€ Segundo equipo', 'fornite.jpg', 'https://discord.gg/ByDAHZ3');
+INSERT INTO torneos (nombre, descripcion, fecha, hora, lugar, premio, foto, url) VALUES ('FIFA 2020', 'Descripción del torneo de Fifa 2020. Dicho juego se realizará al mejor de 50 rondas, con grupos de 10 y un máximo de 100 concursantes', '2020-07-16', '20:00', 'Asociación EG', '500€ Primer equipo, 20€ Segundo equipo', 'fifa.jpg', 'https://discord.gg/ByDAHZ3');
 
+/* Cargamos la tabla de eventos*/
+INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, foto, foto2, foto3, url) VALUES ('Titulo Evento',  'Descripción del evento, puede ser una cadena de caracteres de unas 50 o 60 palabras', '2020-01-01', '15:00', 'En la asociación', 'Gratis', 'https://picsum.photos/450/300?image=1072','https://picsum.photos/450/300?image=855','https://picsum.photos/450/300?image=355', 'www.marca.es');
+INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, foto, foto2, foto3, url) VALUES ('Titulo Evento2', 'Descripción del evento, puede ser una cadena de caracteres de unas 50 o 60 palabras', '2020-01-01', '15:00', 'Pabellón Alcarrachela', 'Gratis', 'https://picsum.photos/450/300?image=1072','https://picsum.photos/450/300?image=855','https://picsum.photos/450/300?image=355', 'www.marca.es');
+INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, foto, foto2, foto3, url) VALUES ('Titulo Evento3', 'Descripción del evento, puede ser una cadena de caracteres de unas 50 o 60 palabras', '2020-01-01', '15:00', 'Parque infantil', 'Gratis', 'https://picsum.photos/450/300?image=1072','https://picsum.photos/450/300?image=855','https://picsum.photos/450/300?image=355', 'www.marca.es');
+INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, foto, foto2, foto3, url) VALUES ('Titulo Evento4', 'Descripción del evento, puede ser una cadena de caracteres de unas 50 o 60 palabras', '2020-01-01', '15:00', 'C/ José canalejas, 9', 'Gratis', 'https://picsum.photos/450/300?image=1072','https://picsum.photos/450/300?image=855','https://picsum.photos/450/300?image=355', 'www.marca.es');
 
-
+/* Cargamos la tabla de configuracion*/
+INSERT INTO configuracion (id, direccion, email, telefono, horario) values (1, 'Calle José Canalejas, 9, 41400 Écija, Sevilla', 'ecijagaming@gmail.com', '+34 666 666 666', 'Lunes-Domingo 9:30 - 22:00');
 
 
 

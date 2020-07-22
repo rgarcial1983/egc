@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+</head>
+<body class="bg grey darken-1">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<table class="table table-hover table-bordered" id="tabla_usuarios" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+					<thead class="thead bg-primary white-text">
+						<tr>
+							<th>Username</th>
+							<th>Nombre</th>
+							<th>Apellido1</th>
+							<th>Apellido2</th>
+							<th>Email</th>
+							<th>Cumpleaños</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuario: ${usuarios}">
+							<td th:text="${usuario.username}"></td>
+							<td th:text="${usuario.nombre}"></td>
+							<td th:text="${usuario.apellido1}"></td>
+							<td th:text="${usuario.apellido2}"></td>
+							<td th:text="${usuario.email}"></td>
+							<td th:text="${#dates.format(usuario.fhNacimiento, 'dd/MM/yyyy')}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')">
+							<a class="btn btn-success btn-sm px-3 btnNuevo" id="btnNuevo" th:href="@{'/usuario'}" data-toggle="modal" data-target="#modalRegisterForm"> <i class="fas fa-user-plus fa-fw"></i>
+							</a> 
+							<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw"></i>
+							</a> 
+							<a class="btn btn-danger btn-sm px-3 btnEliminar" th:href="@{/usuario/eliminar/} + ${usuario.id}" onclick="return confirm('Estas seguro que quieres eliminar?');" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i>
+							</a>
+							</td>
+						</tr>
+					</tbody>
+
+				</table>
+				<!-- <nav th:replace="paginator-nav :: paginator"></nav> -->
+
+				<!-- Modal Registro-->
+				<div class="modal fade bg-black usuarioModal" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<form th:action="@{/usuario/accion=nuevo}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header text-center text-white bg black">
+									<h4 class="modal-title w-100 font-weight-bold">Nuevo Usuario</h4>
+									<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body mx-3">
+									<!--Grid row-->
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control validate"> <label for="orangeForm-nombre">Nombre</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido1}" id="ape1" class="form-control validate"> <label for="orangeForm-ape1">Primer
+													apellido</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido2}" id="ape2" class="form-control validate"> <label for="orangeForm-ape2">Segundo
+													apellido</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user-ninja prefix grey-text"></i> <input type="text" th:field="*{username}" id="alias" class="form-control validate"> <label for="orangeForm-alias">Nick/Alias</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-envelope prefix grey-text"></i> <input type="email" th:field="*{email}" id="email" class="form-control validate"> <label for="orangeForm-email">Email</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" th:field="*{password}" id="password1" class="form-control validate"> <label for="orangeForm-pass">Password</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" id="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer d-flex justify-content-center">
+									<button id="btnLimpiarUsuario" type="reset" class="btn btn-eg">Limpiar</button>
+									<button id="btnNuevoUsuario" class="btn btn-eg">Registrarse</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			
+			$('.table .btnEditar').on('click', function(event) {
+				event.preventDefault();
+				var href = $(this).attr('href');
+				
+				$.get(href, function(usuario, status) {
+					$('.usuarioModal #nombre').val(usuario.nombre);
+					$('.usuarioModal #ape1').val(usuario.apellido1);
+					$('.usuarioModal #ape2').val(usuario.apellido2);
+					$('.usuarioModal #cumple').val(usuario.fhNacimiento);
+				});
+				
+				$('.usuarioModal #modalRegisterForm').modal();
+				//$("#formularioRegistro").submit();
+			});
+			
+			$('#btnEliminar').on('click', function(e) {
+				Swal.fire({
+					  title: 'Eliminar usuario',
+					  text: "¿Está seguro de que quiere eliminar?",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes, delete it!'
+					}).then((result) => {
+					  if (result.value) {
+					    Swal.fire(
+					      'Deleted!',
+					      'Your file has been deleted.',
+					      'success'
+					    )
+					  }
+					});	
+			});
+			
+			
+			
+			
+			// Datatable
+			$('#tabla_usuarios').DataTable({
+				ordering : true,
+				"language": {
+				    "sProcessing":     "Procesando...",
+	                "sLengthMenu":     "Mostrar _MENU_ registros",
+	                "sZeroRecords":    "No se encontraron resultados",
+	                "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+	                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+	                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+	                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+	                "sInfoPostFix":    "",
+	                "sSearch":         "Buscar:",
+	                "sUrl":            "",
+	                "sInfoThousands":  ",",
+	                "sLoadingRecords": "Cargando...",
+	                "oPaginate": {
+	                    "sFirst":    "Primero",
+	                    "sLast":     "Último",
+	                    "sNext":     "Siguiente",
+	                    "sPrevious": "Anterior"
+	                },
+	                "oAria": {
+	                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+	                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	                },
+	                "buttons": {
+	                    "copy": "Copiar",
+	                    "colvis": "Visibilidad"
+	                }
+				}
+			});
+		});
+	</script>
+
+	
+
+	
+
+	<!-- JS Datatable -->
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+</body>
+</html>

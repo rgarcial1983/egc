@@ -10,7 +10,12 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="card">
-					<div class="card-header" th:text="${titulo}"></div>
+					<div class="card-header">
+						<span th:text="${titulo}"></span>
+						<a class="close" aria-label="Close" th:href="@{'/torneo/listar'}">
+							<span aria-hidden="true">×</span>
+						</a>
+					</div>
 					<div class="card-body">
 
 						<!-- Modal Nuevo/Editar -->
@@ -18,9 +23,13 @@
 						<form th:action="@{/torneo/form}" th:object="${torneo}" method="post" enctype="multipart/form-data" class="md-form" id="formulario">
 							<div class="form-group row">
 								<div class="col-sm-5">
-									<img class="img-thumbnail img-fluid" th:if="${#strings.length(torneo.foto) > 0}" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
+									<img class="img-thumbnail img-fluid" th:if="${ torneo.foto != null && #strings.length(torneo.foto) > 0}" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
 								
-									<input id="input-id" type="file" name="file" class="file" data-preview-file-type="text" >
+									<input id="input-id" type="file" name="file" class="file" data-preview-file-type="text">
+									<input type="text" th:field="*{foto}">
+									<div class="md-form m-20">
+										<i class="fab fa-discord prefix grey-text"></i> <input type="text" th:field="*{url}"  id="url" class="form-control mb-3"> <label for="defaultForm-text">Url Inscripción</label>
+									</div>
 								</div>
 								<div class="col-sm-7">
 									<div class="md-form m-0">
@@ -51,8 +60,8 @@
 								</div>
 							</div>
 							<div class="modal-footer d-flex justify-content-center">
-								<button id="btnGuardar" class="btn btn-default" onclick="submit">Guardar</button>
-								<button id="btnBorrar" type="reset" class="btn btn-default">Limpiar</button>
+								<button id="btnGuardar" class="btn btn-eg" onclick="submit">Guardar</button>
+								<button id="btnBorrar" type="reset" class="btn btn-eg">Limpiar</button>
 							</div>
 							
 							<input type="hidden" th:field="*{id}">

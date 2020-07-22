@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="bg grey darken-1">
+
+	<header th:replace="layout/layout :: header"></header>
+
+
+	<div class="container py-3">
+
+		<!-- Card Start -->
+		<div class="card mt-3" th:each="evento: ${eventos}">
+			<div class="row flex">
+
+				<!-- Carousel start -->
+				<div class="col-md-5" th:classappend="${evento.id % 2 == 0} ? 'order-2' : 'order-1'">
+					<div th:id="'CarouselTest' + ${evento.id }" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li th:attr="data-target='#CarouselTest' + ${evento.id }" data-slide-to="0" class="active"></li>
+							<li th:attr="data-target='#CarouselTest' + ${evento.id }" data-slide-to="1"></li>
+							<li th:attr="data-target='#CarouselTest' + ${evento.id }" data-slide-to="2"></li>
+
+						</ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img class="d-block" th:src="${evento.foto}" alt="">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block" th:src="${evento.foto2}" alt="">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block" th:src="${evento.foto3}" alt="">
+							</div>
+							<a class="carousel-control-prev" th:attr="href='#CarouselTest' + ${evento.id }" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+							</a> 
+							<a class="carousel-control-next" th:attr="href='#CarouselTest' + ${evento.id }" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- End of carousel -->
+				
+				<div class="col-md-7" th:classappend="${evento.id % 2 == 0} ? 'order-1' : 'order-2'">
+					<div class="card-block px-6 mt-2 ml-2">
+						<h3 class="card-title text-center">
+							<strong th:text=${evento.nombre}></strong>
+						</h3>
+						<p class="card-text" th:text=${evento.descripcion}></p>
+						<br> 
+						<!-- Fecha y hora -->
+						<div >
+							<i class="fas fa-calendar-alt fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${#dates.format(evento.fecha, 'dd/MM/yyyy')}"></span> <i class="far fa-clock fa-1x fa-fw"
+								style="color: #b80f22;"></i> <span class="card-text" th:text="${#dates.format(evento.hora, 'HH:mm')}"></span>
+						</div>
+						<!-- Lugar -->
+						<div>
+							<i class="fas fa-map-marker-alt fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${evento.lugar}"></span>
+						</div>
+						<!-- Precio -->
+						<div>
+							<i class="fas fa-euro-sign fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${evento.precio}"></span>
+						</div>
+						<!-- Url enlace -->
+						<div>
+							<i class="fas fa-code fa-1x fa-fw" style="color: #b80f22;"></i> <a class="card-text" th:href="@{${'https:' + evento.url}}" th:text="${evento.url}"></a>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<!-- End of card -->
+		<br>
+		<footer th:replace="layout/layout :: footer"></footer>
+
+	</div>
+
+
+
+</body>
+</html>

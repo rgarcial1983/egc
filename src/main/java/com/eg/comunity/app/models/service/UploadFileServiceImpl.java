@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,8 @@ public class UploadFileServiceImpl implements IUploadFileService {
 
 	@Override
 	public String copy(MultipartFile file) throws IOException {
-		String uniqueFilename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+		//String uniqueFilename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+		String uniqueFilename = file.getOriginalFilename();
 		Path rootPath = getPath(uniqueFilename);
 
 		log.info("rootPath: " + rootPath);
@@ -75,7 +75,6 @@ public class UploadFileServiceImpl implements IUploadFileService {
 
 	@Override
 	public void init() throws IOException {
-		// TODO Auto-generated method stub
 		Files.createDirectory(Paths.get(UPLOADS_FOLDER));
 	}
 }

@@ -87,7 +87,7 @@ public class ClienteController {
 		return "ver";
 	}
 
-	@RequestMapping(value = {"/listar", "/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/listar"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
 			HttpServletRequest request) {
@@ -195,7 +195,7 @@ public class ClienteController {
 
 		}
 
-		String mensajeFlash = (cliente.getId() != null) ? "Cliente editado con �xito!" : "Cliente creado con éxito!";
+		String mensajeFlash = (cliente.getId() != null) ? "Cliente editado con éxito!" : "Cliente creado con éxito!";
 
 		clienteService.save(cliente);
 		status.setComplete();

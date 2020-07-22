@@ -19,8 +19,8 @@ public class TorneoServiceImpl implements ITorneoService{
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Torneo> findAll() {
-		return (List<Torneo>) torneoDao.findAll();
+	public List<Torneo> findAllByOrderByFechaDesc() {
+		return (List<Torneo>) torneoDao.findAllByOrderByFechaDesc();
 	}
 
 	@Override
