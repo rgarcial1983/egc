@@ -40,7 +40,7 @@ public class EventoController {
 		model.addAttribute("titulo", "Listado de Eventos");
 		model.addAttribute("eventos", eventos);
 		model.addAttribute("page", pageRender);
-		return "/evento/eventos";
+		return "evento/eventos";
 	}
 
 }
