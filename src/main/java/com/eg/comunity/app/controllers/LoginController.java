@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eg.comunity.app.models.dao.IUsuarioDao;
+import com.eg.comunity.app.models.entity.Torneo;
 import com.eg.comunity.app.models.entity.Usuario;
 
 @Controller
@@ -87,7 +88,7 @@ public class LoginController {
 		return retorno;
 	}
 	
-	
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = {"usuario/listar"}, method = RequestMethod.GET)
 	public String listarUsuarios(Model model) {
 		
@@ -125,7 +126,7 @@ public class LoginController {
 		}
 		model.put("usuario", usuario);
 		model.put("titulo", "Editar Usuario");
-		return "usuario";
+		return "usuario/form";
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -145,5 +146,14 @@ public class LoginController {
 
 		}
 		return "redirect:/usuario/listar";
+	}
+
+	@RequestMapping(value = {"/usuarioNuevo"}, method = RequestMethod.GET)
+	public String formularioUsuario(Model model) {
+		
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("titulo", "Nuevo Usuario");
+		
+		return "usuario/form";
 	}
 }

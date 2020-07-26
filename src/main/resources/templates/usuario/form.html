@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="bg elegant-color">
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					
+					<div class="card-body">
+
+						<!-- Modal Nuevo/Editar -->
+						
+						<form th:action="@{/usuario/accion=crear}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header text-center text-white bg black">
+									<h4 class="modal-title w-100 font-weight-bold" th:text="${titulo}"></h4>
+									<a class="close" aria-label="Close" th:href="@{'/usuario/listar'}">
+										<span aria-hidden="true">×</span>
+									</a>
+								</div>
+								<div class="modal-body mx-3">
+									<!--Grid row-->
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control validate"> <label for="orangeForm-nombre">Nombre</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido1}" id="ape1" class="form-control validate"> <label for="orangeForm-ape1">Primer
+													apellido</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido2}" id="ape2" class="form-control validate"> <label for="orangeForm-ape2">Segundo
+													apellido</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-user-ninja prefix grey-text"></i> <input type="text" th:field="*{username}" id="alias" class="form-control validate"> <label for="orangeForm-alias">Nick/Alias</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-envelope prefix grey-text"></i> <input type="email" th:field="*{email}" id="email" class="form-control validate"> <label for="orangeForm-email">Email</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" th:field="*{password}" id="password1" class="form-control validate"> <label for="orangeForm-pass">Password</label>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="md-form mb-0">
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" id="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer d-flex justify-content-center">
+									<button id="btnLimpiarUsuario" type="reset" class="btn btn-eg">Limpiar</button>
+									<button id="btnGuardarUsuario" class="btn btn-eg" onclick="submit">Guardar</button>
+								</div>
+							</div>
+						</div>
+							<input type="hidden" th:field="*{id}">
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<footer th:replace="layout/layout :: footer"></footer>
+
+	
+</body>
+</html>

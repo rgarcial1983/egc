@@ -13,7 +13,7 @@
 					<input autofocus="autofocus" class="form-control mr-sm-2 text-white" type="text" name="q" id="myFilter" th:placeholder="${param.q}" aria-label="Buscar">
 				</form>
 			</div>
-			<div class="md-form my-0 col-md-3">
+			<div class="md-form my-0 col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">
 				<a id="btnNuevoArriba" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo}"> 
 					<i class="fa fa-gamepad fa-1x fa-fw" ></i>  Nuevo Torneo
 				</a>

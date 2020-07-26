@@ -30,7 +30,7 @@
 				<div class="collapse navbar-collapse" id="navigationbar">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/evento/eventos}">Eventos</a></li>
-						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/usuario/listar}">Usuarios</a></li>
+						<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="#" th:href="@{/usuario/listar}">Usuarios</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Cliente</a></li> -->
 						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/torneo/listar}">Torneos</a></li>
 						<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="#" th:href="@{/chat}">Chat</a></li>

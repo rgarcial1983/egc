@@ -55,7 +55,6 @@ public class ClienteController {
 	@Autowired
 	private IUploadFileService uploadFileService;
 
-	@Secured({"ROLE_ADMIN"})
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 
