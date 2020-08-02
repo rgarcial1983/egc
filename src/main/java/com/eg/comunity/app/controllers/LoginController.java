@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.eg.comunity.app.models.dao.IUsuarioDao;
-import com.eg.comunity.app.models.entity.Torneo;
 import com.eg.comunity.app.models.entity.Usuario;
 
 @Controller
@@ -59,14 +58,18 @@ public class LoginController {
 	
 	
 	@PostMapping(value = {"/usuario", "/usuario/accion={accion}"})
-	public String nuevoUsuario(@PathVariable(value = "accion") String accion, Usuario usuario,Model model, Principal principal, RedirectAttributes flash) {
-		String retorno = !"".equals(accion) ? "usuario/listar" : "redirect:/login";
+	public String nuevoUsuario(@PathVariable(value = "accion") String accion, Usuario usuario, Model model, Principal principal, RedirectAttributes flash) {
+		String retorno = !"".equals(accion) ? "redirect:/usuario/listar" : "redirect:/login";
+		
+		// Traemos el usuario de BBDD que tenga ese id
+		//Usuario userBD = usuarioDao.findById(usuario.getId()).orElse(null);
 		
 		// Revisamos si el usuario ya existe
 		Usuario userAux = usuarioDao.findByUsernameOrEmail(usuario.getUsername(), usuario.getEmail());
-		if(userAux != null) {
-			flash.addFlashAttribute("info", "Ya existe un usuario con ese nick/alias");
-			model.addAttribute("error", "Error en el login: Nombre de usuario o contraseña incorrecta, por favor vuelva a intentarlo!");
+		if(userAux != null && (usuario.getId() != userAux.getId())) {
+			flash.addFlashAttribute("info", "El nick/alias o el email ya existen");
+			flash.addFlashAttribute("mensajeInfo", "El nick/alias o el email ya existen");
+			model.addAttribute("error", "El nick/alias o el email ya existen");
 			return retorno;
 		}
 		
@@ -79,7 +82,6 @@ public class LoginController {
 		// Activamos el usuario
 		usuario.setEnabled(true);
 		
-		userAux = usuarioDao.findByUsername("user");
         usuario.setRoles(usuarioDao.findRolesByUsername("user"));
 		
 		usuarioDao.save(usuario);
@@ -113,19 +115,26 @@ public class LoginController {
 	public String editarUsurio(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 
 		Usuario usuario = null;
+		String mensajeFlash = "";
 
 		if (id > 0) {
 			usuario = usuarioDao.findById(id).orElse(null);
 			if (usuario == null) {
 				flash.addFlashAttribute("error", "El ID del usuario no existe en la BBDD!");
+				flash.addFlashAttribute("mensajeDanger", "El ID del usuario no existe en la BBDD!");
 				return "redirect:/usuario";
 			}
 		} else {
 			flash.addFlashAttribute("error", "El ID del usuario no puede ser cero!");
+			flash.addFlashAttribute("mensajeDanger", "El ID del usuario no puede ser cero!");
 			return "redirect:/listar";
 		}
 		model.put("usuario", usuario);
 		model.put("titulo", "Editar Usuario");
+		
+		mensajeFlash = (usuario.getId() != null) ? "Usuario editado con éxito!" : "Usuario creado con éxito!";
+		flash.addFlashAttribute("success", mensajeFlash);
+		
 		return "usuario/form";
 	}
 	
@@ -140,10 +149,6 @@ public class LoginController {
 			usuarioDao.save(usuario);
 			flash.addFlashAttribute("success", "Usuario eliminado con éxito!");
 
-			/*if (uploadFileService.delete(cliente.getFoto())) {
-				flash.addFlashAttribute("info", "Foto " + cliente.getFoto() + " eliminada con exito!");
-			}*/
-
 		}
 		return "redirect:/usuario/listar";
 	}
@@ -155,5 +160,25 @@ public class LoginController {
 		model.addAttribute("titulo", "Nuevo Usuario");
 		
 		return "usuario/form";
+	}
+	
+	@PostMapping(value = {"/usuario/create"})
+	public String crearNuevoUsuario(Usuario usuario, Model model, RedirectAttributes flash) {
+		String mensajeFlash = (usuario.getId() != null) ? "Usuario editado con éxito!!" : "Usuario creado con éxito!";
+
+		// Codificamos la clave
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		System.out.println(usuario.getPassword());
+		
+		// Activamos el usuario
+		usuario.setEnabled(true);
+		
+		// Metemos los roles
+        usuario.setRoles(usuarioDao.findRolesByUsername("user"));
+		
+		usuarioDao.save(usuario);
+		flash.addFlashAttribute("success", mensajeFlash);
+		
+		return "redirect:/login";
 	}
 }

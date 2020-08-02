@@ -62,8 +62,11 @@
 							<a id="btnNuevo" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo}">
 								<i class="fas fa-plus-circle fa-fw " style="color: #b80f22;"></i>
 							</a>
-							<a id="btnEliminar" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo/eliminar/} + ${torneo.id}"
+							<!-- <a id="btnEliminar" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo/eliminar/} + ${torneo.id}"
 							onclick="return confirm('¿Seguro que quieres eliminar el torneo?');">
+								<i class="far fa-trash-alt fa-fw " style="color: #b80f22;"></i>
+							</a> -->
+							<a id="btnEliminar" class="btn btn-outline-warning waves-effect px-3" th:onclick="eliminarRegistro([[${torneo.id}]], '¿Desea eliminar el torneo?', 'Esta operación no se puede deshacer', '/torneo/eliminar/', '/torneo/listar')" >
 								<i class="far fa-trash-alt fa-fw " style="color: #b80f22;"></i>
 							</a>
 							<a id="btnEditar" class="btn btn-outline-warning waves-effect px-3" th:href="@{/torneo/} + ${torneo.id}">
@@ -90,6 +93,7 @@
                 $("#myFilter").attr("placeholder", "Buscar...");
             }
 
+            /*
 	        if ($("#mensajeSuccess").is(':visible')){
 	            var mensaje = $("#mensajeSuccess").html();
 	            console.log(mensaje);
@@ -99,7 +103,9 @@
 	            		 "success");
 	            }
 	        }
-        
+	        */
+	        
+	        
         });
         
         

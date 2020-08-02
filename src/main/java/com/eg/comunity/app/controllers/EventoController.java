@@ -27,7 +27,7 @@ public class EventoController {
 	@Autowired
 	private IEventoService eventoService;
 	
-	@RequestMapping(value = {"/", "/evento/eventos"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/evento/listar"}, method = RequestMethod.GET)
 	public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model,
 			Authentication authentication,
 			HttpServletRequest request) {	
@@ -40,7 +40,7 @@ public class EventoController {
 		model.addAttribute("titulo", "Listado de Eventos");
 		model.addAttribute("eventos", eventos);
 		model.addAttribute("page", pageRender);
-		return "evento/eventos";
+		return "evento/listar";
 	}
 
 }

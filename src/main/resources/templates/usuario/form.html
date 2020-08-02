@@ -15,13 +15,13 @@
 
 						<!-- Modal Nuevo/Editar -->
 						
-						<form th:action="@{/usuario/accion=crear}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
+						<form th:action="@{/usuario/accion=editarCrear}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header text-center text-white bg black">
 									<h4 class="modal-title w-100 font-weight-bold" th:text="${titulo}"></h4>
 									<a class="close" aria-label="Close" th:href="@{'/usuario/listar'}">
-										<span aria-hidden="true">×</span>
+										<span aria-hidden="true" class="text-white">x</span>
 									</a>
 								</div>
 								<div class="modal-body mx-3">
@@ -49,7 +49,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="md-form mb-0">
-												<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
+												<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumplea&ntilde;os</label>
 											</div>
 										</div>
 									</div>
@@ -70,12 +70,12 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="md-form mb-0">
-												<i class="fas fa-lock prefix grey-text"></i> <input type="password" th:field="*{password}" id="password1" class="form-control validate"> <label for="orangeForm-pass">Password</label>
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" max="60" th:value="*{password}" id="password" name="password" class="form-control validate"> <label for="orangeForm-pass">Password</label>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="md-form mb-0">
-												<i class="fas fa-lock prefix grey-text"></i> <input type="password" id="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
+												<i class="fas fa-lock prefix grey-text"></i> <input type="password" max="60" th:value="*{password}" id="password2" name="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
 											</div>
 										</div>
 									</div>

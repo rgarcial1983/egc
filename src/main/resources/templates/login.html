@@ -13,6 +13,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="css/mdb.min.css" rel="stylesheet">
+<!-- JQUERY -->
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 <!-- Your custom styles (optional) -->
 <link href="css/eg.css" rel="stylesheet">
 
@@ -40,7 +42,7 @@
 
 		<!-- Modal Registro-->
 		<div class="modal fade bg-black" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<form th:action="@{/usuario}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
+			<form th:action="@{/usuario/create}" th:object="${usuario}" method="post" enctype="multipart/form-data" class="md-form" id="formularioRegistro">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header text-center text-white bg black">
@@ -156,11 +158,13 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			setTimeout(function() {
-				$(".alert").fadeOut(1500);
+				$(".alert").fadeOut(2500);
 			}, 4000);
 		});
 	</script>
 
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-ui.js}"></script>
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<!-- Bootstrap core JavaScript -->

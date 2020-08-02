@@ -15,8 +15,7 @@
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
 <link rel="stylesheet" th:href="@{/css/summernote-bs4.min.css}" />
 <link rel="stylesheet" th:href="@{/css/summernote.min.css}" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300">-->
 </head>
 <body>
 
@@ -29,7 +28,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navigationbar">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/evento/eventos}">Eventos</a></li>
+						<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/evento/listar}">Eventos</a></li>
 						<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="#" th:href="@{/usuario/listar}">Usuarios</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Cliente</a></li> -->
 						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/torneo/listar}">Torneos</a></li>
@@ -156,7 +155,7 @@
 
 		<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">
-			© 2020 Copyright: <a href="https://mdbootstrap.com/"> rgarcial1983</a>
+			© 2020 Copyright: <a href="https://github.com/rgarcial1983"> rgarcial1983</a>
 		</div>
 		<!-- Copyright -->
 
@@ -169,20 +168,15 @@
 		<script th:src="@{/js/mdb.min.js}"></script>
 		<script th:src="@{/js/summernote-bs4.min.js}"></script>
 		<script th:src="@{/js/summernote.min.js}"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script th:src="@{/js/utilEG.js}"></script>
 
 		<script type="text/javascript">
 			$(document).ready(function() {
 				setTimeout(function() {
 					$(".alert").fadeOut(1500);
 				}, 2000);
-
-				/*
-				setTimeout(function() {
-				    $(".content2").fadeIn(1500);
-				},6000);
-				 */
 			});
 		</script>
 

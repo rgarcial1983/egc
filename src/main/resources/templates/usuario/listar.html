@@ -41,7 +41,11 @@
 							</a> 
 							<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw"></i>
 							</a> 
+							<!-- 
 							<a class="btn btn-danger btn-sm px-3 btnEliminar" th:href="@{/usuario/eliminar/} + ${usuario.id}" onclick="return confirm('Estas seguro que quieres eliminar?');" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i>
+							</a>
+							-->
+							<a class="btn btn-danger btn-sm px-3 btnEliminar" th:onclick="eliminarRegistro([[${usuario.id}]])" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i>
 							</a>
 							</td>
 						</tr>
@@ -64,24 +68,8 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
-			
-			$('.table .btnEditar').on('click', function(event) {
-				event.preventDefault();
-				var href = $(this).attr('href');
-				
-				$.get(href, function(usuario, status) {
-					$('.usuarioModal #nombre').val(usuario.nombre);
-					$('.usuarioModal #ape1').val(usuario.apellido1);
-					$('.usuarioModal #ape2').val(usuario.apellido2);
-					$('.usuarioModal #cumple').val(usuario.fhNacimiento);
-				});
-				
-				$('.usuarioModal #modalRegisterForm').modal();
-				//$("#formularioRegistro").submit();
-			});
-			
-			$('#btnEliminar').on('click', function(e) {
+			/*
+			function eliminarUsuario() {
 				Swal.fire({
 					  title: 'Eliminar usuario',
 					  text: "¿Está seguro de que quiere eliminar?",
@@ -98,8 +86,38 @@
 					      'success'
 					    )
 					  }
-					});	
-			});
+				});
+			}
+			*/	
+			
+			// Mensajes
+			if ($("#mensajeSuccess").is(':visible')){
+	            var mensaje = $("#mensajeSuccess").html();
+	            console.log(mensaje);
+	            if(mensaje != undefined && mensaje != "") {            	
+	            	swal(mensaje, 
+	            		 "", 
+	            		 "success");
+	            }
+	        }
+			if ($("#mensajeDanger").is(':visible')){
+	            var mensaje = $("#mensajeDanger").html();
+	            console.log(mensaje);
+	            if(mensaje != undefined && mensaje != "") {            	
+	            	swal(mensaje, 
+	            		 "", 
+	            		 "danger");
+	            }
+	        }
+			if ($("#mensajeInfo").is(':visible')){
+	            var mensaje = $("#mensajeInfo").html();
+	            console.log(mensaje);
+	            if(mensaje != undefined && mensaje != "") {            	
+	            	swal(mensaje, 
+	            		 "", 
+	            		 "warning");
+	            }
+	        }
 			
 			
 			

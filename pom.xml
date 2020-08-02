@@ -36,11 +36,11 @@
 			<artifactId>sweetalert2</artifactId>
 			<version>9.10.12</version>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>3.3.1-1</version>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>jquery</artifactId>
+		    <version>3.3.1-1</version>
 		</dependency>
 
 		<dependency>
@@ -129,17 +129,6 @@
 						<web>java $JAVA_OPTS -jar
 							${project.build.directory}/${project.build.finalName}.jar</web>
 					</processTypes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<nonFilteredFileExtensions>
-						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
-						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
 		</plugins>
