@@ -7,12 +7,12 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container py-4">
-		<div class="row">
-			<div class="col-sm-12">
+		<div class="row justify-content-md-center">
+			<div class="col-sm-6">
 				<div class="card">
 					<div class="card-header">
 						<span th:text="${titulo}"></span>
-						<a class="close" aria-label="Close" th:href="@{'/torneo/listar'}">
+						<a class="close" aria-label="Close" th:href="@{'/evento/listar'}">
 							<span aria-hidden="true">×</span>
 						</a>
 					</div>
@@ -20,22 +20,20 @@
 
 						<!-- Modal Nuevo/Editar -->
 
-						<form th:action="@{/torneo/form}" th:object="${torneo}" method="post" enctype="multipart/form-data" class="md-form" id="formulario">
+						<form th:action="@{/evento/form}" th:object="${evento}" method="post" enctype="multipart/form-data" class="md-form mt-0" id="formulario">
 							<div class="form-group row">
-								<div class="col-sm-5">
-									<img class="img-thumbnail img-fluid" th:if="${ torneo.foto != null && #strings.length(torneo.foto) > 0}" th:src="@{'/uploads/' + ${torneo.foto}}" th:alt="${torneo.nombre}" />
 								
-									<input id="input-id" type="file" name="file" class="file" data-preview-file-type="text">
-									<input type="text" th:field="*{foto}">
-									<div class="md-form m-20">
-										<i class="fab fa-discord prefix grey-text"></i> <input type="text" th:field="*{url}"  id="url" class="form-control mb-3"> <label for="defaultForm-text">Url Inscripción</label>
-									</div>
-								</div>
-								<div class="col-sm-7">
+								<div class="col-sm">
 									<div class="md-form m-0">
 										<i class="fas fa-envelope prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control mb-3"> <label for="defaultForm-text">Título</label>
 									</div>
 
+									<div class="md-form">
+										<i class="fas fa-pencil-alt prefix grey-text"></i>
+										<textarea id="torneoDescripcion" th:field="*{descripcion}" class="md-textarea form-control mb-3" rows="2"></textarea>
+										<label for="torneoDescripcion">Descripción</label>
+									</div>
+									
 									<div class="md-form m-0">
 										<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fecha}"  id="fecha" class="form-control mb-3"> <label for="defaultForm-text">Fecha</label>
 									</div>
@@ -53,14 +51,19 @@
 									</div>
 
 									<div class="md-form m-0">
-										<i class="fa fa-trophy prefix grey-text"></i> <input type="text" th:field="*{premio}" id="premio" class="form-control mb-3"> <label for="defaultForm-text">Premio</label>
+										<i class="fa fa-code prefix grey-text"></i> <input type="text" th:field="*{url}" id="url" class="form-control mb-3"> <label for="defaultForm-text">Url</label>
+									</div>
+									
+									<div class="md-form m-0">
+										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto}" id="foto" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+									</div>
+									<div class="md-form m-0">
+										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto2}" id="foto2" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+									</div>
+									<div class="md-form m-0">
+										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto3}" id="foto3" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
 									</div>
 
-									<div class="md-form">
-										<i class="fas fa-pencil-alt prefix grey-text"></i>
-										<textarea id="torneoDescripcion" th:field="*{descripcion}" class="md-textarea form-control mb-3" rows="2"></textarea>
-										<label for="torneoDescripcion">Descripción</label>
-									</div>
 								</div>
 							</div>
 							<div class="modal-footer d-flex justify-content-center">

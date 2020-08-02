@@ -38,6 +38,8 @@ public class Torneo implements Serializable {
 	private String url;
 	
 	private String premio;
+	
+	private String precio;
 
 	@NotNull
 	@Column(name = "fecha")
@@ -124,6 +126,14 @@ public class Torneo implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(String precio) {
+		this.precio = precio;
 	}
 
 	

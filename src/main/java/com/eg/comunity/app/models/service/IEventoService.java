@@ -20,4 +20,6 @@ public interface IEventoService {
 	
 	public void delete(Long id);
 
+	public List<Evento> findByNombre(String nombre);
+
 }

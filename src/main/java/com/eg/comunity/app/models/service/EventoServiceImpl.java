@@ -46,5 +46,11 @@ public class EventoServiceImpl implements IEventoService {
 	public void delete(Long id) {
 		eventoDao.deleteById(id);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Evento> findByNombre(String nombre) {
+		return eventoDao.findByNombreContainingIgnoreCaseOrderByNombreAsc(nombre);
+	}
 	
 }
