@@ -57,6 +57,8 @@ public class Evento implements Serializable {
 	private String foto3;
 	
 	private String url;
+	
+	private String video;
 
 
 	public Long getId() {
@@ -145,6 +147,14 @@ public class Evento implements Serializable {
 
 	public void setFoto3(String foto3) {
 		this.foto3 = foto3;
+	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
 	}
 
 	

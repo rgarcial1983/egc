@@ -64,7 +64,7 @@ public class EventoController {
 	public String buscarEvento(@RequestParam("q") String consulta, Model model) {
 		List<Evento> eventos = eventoService.findByNombre(consulta);
 		model.addAttribute("eventos", eventos);
-		return "torneo/listar";
+		return "evento/listar";
 	}
 
 	@RequestMapping(value = "/evento/{id}")

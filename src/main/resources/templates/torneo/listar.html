@@ -45,6 +45,10 @@
 						<div>
 							<i class="fas fa-map-marker-alt fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${torneo.lugar}"></span>
 						</div>
+						<!-- Precio -->
+						<div>
+							<i class="fas fa-euro-sign fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${torneo.precio}"></span>
+						</div>
 						<!-- Premios -->
 						<div>
 							<i class="fa fa-trophy fa-1x fa-fw" style="color: #b80f22;"></i> <span class="card-text" th:text="${torneo.premio}"></span>
@@ -92,20 +96,21 @@
             if($("#myFilter").attr("placeholder") == '' || $("#myFilter").attr("placeholder")==undefined) {    	
                 $("#myFilter").attr("placeholder", "Buscar...");
             }
-
-            /*
-	        if ($("#mensajeSuccess").is(':visible')){
+/*
+            if ($("#mensajeSuccess").is(':visible')) {
+            	alert("hola Rafa")
 	            var mensaje = $("#mensajeSuccess").html();
 	            console.log(mensaje);
 	            if(mensaje != undefined && mensaje != "") {            	
-	            	swal(mensaje, 
-	            		 "", 
-	            		 "success");
+	            	Swal.fire({
+	  	        	  icon: 'success',
+	  	        	  title: mensaje,
+	  	        	  showConfirmButton: false,
+	  	        	  timer: 2000
+	  	          })
 	            }
 	        }
-	        */
-	        
-	        
+*/	        
         });
         
         

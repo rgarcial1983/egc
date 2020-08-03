@@ -173,11 +173,53 @@
 		<script th:src="@{/js/utilEG.js}"></script>
 
 		<script type="text/javascript">
+			
 			$(document).ready(function() {
 				setTimeout(function() {
-					$(".alert").fadeOut(1500);
-				}, 2000);
+					$(".alert").fadeOut(100);
+				}, 100);
+				
+				
+				// Mensajes
+				if ($("#mensajeSuccess").is(':visible')){
+		            var mensaje = $("#mensajeSuccess").html();
+		            console.log(mensaje);
+		            if(mensaje != undefined && mensaje != "") {            	
+		              Swal.fire({
+		  	        	  icon: 'success',
+		  	        	  title: mensaje,
+		  	        	  showConfirmButton: false,
+		  	        	  timer: 2000
+		  	          })
+		            }
+		        }
+				if ($("#mensajeDanger").is(':visible')){
+		            var mensaje = $("#mensajeDanger").html();
+		            console.log(mensaje);
+		            if(mensaje != undefined && mensaje != "") {            	
+		            	Swal.fire({
+			  	        	  icon: 'danger',
+			  	        	  title: mensaje,
+			  	        	  showConfirmButton: false,
+			  	        	  timer: 2000
+			  	        })
+		            }
+		        }
+				if ($("#mensajeInfo").is(':visible')){
+		            var mensaje = $("#mensajeInfo").html();
+		            console.log(mensaje);
+		            if(mensaje != undefined && mensaje != "") {            	
+		            	Swal.fire({
+			  	        	  icon: 'warning',
+			  	        	  title: mensaje,
+			  	        	  showConfirmButton: false,
+			  	        	  timer: 2000
+			  	        })
+		            }
+		        }
+				
 			});
+			
 		</script>
 
 	</footer>

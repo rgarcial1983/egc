@@ -108,6 +108,7 @@ public class TorneoController {
 		torneoService.save(torneo);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
+		model.addAttribute("mensajeFlash", mensajeFlash);
 		return "redirect:/torneo/listar";
 	}
 	
