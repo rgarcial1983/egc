@@ -16,7 +16,7 @@
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 
-				<table class="table table-hover table-bordered" id="tabla_usuarios" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+				<table class="table table-hover table-bordered table-striped" style="width:100%" id="tabla_usuarios" data-order='[[ 1, "asc" ]]' data-page-length='25'>
 					<thead class="thead bg-primary white-text">
 						<tr>
 							<th>Username</th>
@@ -25,6 +25,8 @@
 							<th>Apellido2</th>
 							<th>Email</th>
 							<th>Cumpleaños</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
 						</tr>
 					</thead>
@@ -37,16 +39,13 @@
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${#dates.format(usuario.fhNacimiento, 'dd/MM/yyyy')}"></td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')">
-							<a class="btn btn-success btn-sm px-3 btnNuevo" id="btnNuevo" th:href="@{'/usuarioNuevo'}"> <i class="fas fa-user-plus fa-fw"></i>
-							</a> 
-							<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw"></i>
-							</a> 
-							<!-- 
-							<a class="btn btn-danger btn-sm px-3 btnEliminar" th:href="@{/usuario/eliminar/} + ${usuario.id}" onclick="return confirm('Estas seguro que quieres eliminar?');" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i>
-							</a>
-							-->
-							<a class="btn btn-danger btn-sm px-3 btnEliminar" th:onclick="eliminarRegistro([[${usuario.id}]])" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i>
-							</a>
+								<a class="btn btn-success btn-sm px-3 btnNuevo" id="btnNuevo" th:href="@{'/usuarioNuevo'}"> <i class="fas fa-user-plus fa-fw"></i></a>
+							</td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"> 
+								<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw"></i></a>
+							</td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')">
+								<a class="btn btn-danger btn-sm px-3 btnEliminar" th:onclick="eliminarRegistro([[${usuario.id}]])" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i></a>
 							</td>
 						</tr>
 					</tbody>
@@ -98,6 +97,7 @@
 			// Datatable
 			$('#tabla_usuarios').DataTable({
 				ordering : true,
+				"scrollX": true,
 				"language": {
 				    "sProcessing":     "Procesando...",
 	                "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -110,7 +110,7 @@
 	                "sSearch":         "Buscar:",
 	                "sUrl":            "",
 	                "sInfoThousands":  ",",
-	                "sLoadingRecords": "Cargando...",
+	                "sLoadingRecords": "Cargando...",	                
 	                "oPaginate": {
 	                    "sFirst":    "Primero",
 	                    "sLast":     "Último",
@@ -136,7 +136,6 @@
 
 	<!-- JS Datatable -->
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 </body>
 </html>
