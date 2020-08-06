@@ -57,7 +57,7 @@
 					</div>
 					
 					<div th:if="(${evento.video != ''})" th:id="'CarouselTest' + ${evento.id}" class="embed-responsive embed-responsive-16by9">
-  						<iframe class="embed-responsive-item" th:src="${evento.video}" allowfullscreen></iframe>
+  						<iframe class="embed-responsive-item" th:src="${evento.video}"></iframe>
 					</div>
 				</div>
 				<!-- End of carousel -->
