@@ -30,9 +30,11 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	@Column(length = 30, unique = true)
 	private String username;
 
+	@NotEmpty
 	@Column(length = 60)
 	private String password;
 
@@ -56,7 +58,7 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Column(name = "fh_nacimiento")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fhNacimiento;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

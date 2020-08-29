@@ -62,11 +62,13 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control validate"> <label for="orangeForm-nombre">Nombre</label>
+										<div th:errors="*{nombre}"></div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido1}" id="ape1" class="form-control validate"> <label for="orangeForm-ape1">Primer apellido</label>
+										<div th:errors="*{apellido1}"></div>
 									</div>
 								</div>
 							</div>
@@ -79,7 +81,8 @@
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="text" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
+										<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="date" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
+										<div th:errors="*{fhNacimiento}"></div>
 									</div>
 								</div>
 							</div>
@@ -88,11 +91,13 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-user-ninja prefix grey-text"></i> <input type="text" th:field="*{username}" id="alias" class="form-control validate"> <label for="orangeForm-alias">Nick/Alias</label>
+										<div th:errors="*{username}"></div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-envelope prefix grey-text"></i> <input type="email" th:field="*{email}" id="email" class="form-control validate"> <label for="orangeForm-email">Email</label>
+										<div th:errors="*{email}"></div>
 									</div>
 								</div>
 							</div>
@@ -101,6 +106,7 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-lock prefix grey-text"></i> <input type="password" th:field="*{password}" id="password1" class="form-control validate"> <label for="orangeForm-pass">Password</label>
+										<div th:errors="*{password}"></div>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -121,6 +127,7 @@
 				$(document).ready(function() {
 					
 					$('#btnNuevoUsuario').on('click', function(e) {
+						
 						e.preventDefault();
 						Swal.fire({
 						  position: 'center',
@@ -130,7 +137,7 @@
 						  timer: 5000
 						})
 						
-						$("#formularioRegistro").submit();
+						$("#mularioRegistro").submit();
 					});
 				});
 			</script>

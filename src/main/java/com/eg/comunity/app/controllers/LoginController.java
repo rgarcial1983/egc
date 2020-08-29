@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +61,13 @@ public class LoginController {
 	
 	
 	@PostMapping(value = {"/usuario", "/usuario/accion={accion}"})
-	public String nuevoUsuario(@PathVariable(value = "accion") String accion, Usuario usuario, Model model, Principal principal, RedirectAttributes flash) {
+	public String nuevoUsuario(@PathVariable(value = "accion") String accion, @Valid Usuario usuario, Model model, Principal principal, RedirectAttributes flash, BindingResult result) {
+		
+		// Validamos los campos obligatorios
+		if(result.hasErrors()) {
+			return "login";
+		}
+		
 		String retorno = !"".equals(accion) ? "redirect:/usuario/listar" : "redirect:/login";
 		
 		// Traemos el usuario de BBDD que tenga ese id
