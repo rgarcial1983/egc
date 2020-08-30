@@ -22,16 +22,16 @@
 	<header th:fragment="header">
 		<div class="container">
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-				<img th:src="@{/images/logoEG.jpg}" height="45" class="d-inline-block rounded-circle" alt="mdb logo">EGC
+				<a th:href="@{/torneo/listar}" ><img th:src="@{/images/logoEG.jpg}" height="45" class="d-inline-block rounded-circle" alt="mdb logo"></a>EGC
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationbar" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navigationbar">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active"><a class="nav-link" href="#" th:href="@{/evento/listar}">Eventos</a></li>
-						<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="#" th:href="@{/usuario/listar}">Usuarios</a></li>
+						<li class="nav-item active" id="irEventos"><a class="nav-link" href="#" th:href="@{/evento/listar}">Eventos</a></li>
+						<li class="nav-item"  id="irUsuarios" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" href="#" th:href="@{/usuario/listar}">Usuarios</a></li>
 						<!-- <li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Cliente</a></li> -->
-						<li class="nav-item"><a class="nav-link" href="#" th:href="@{/torneo/listar}">Torneos</a></li>
+						<li class="nav-item"  id="irTorneos"><a class="nav-link" href="#" th:href="@{/torneo/listar}">Torneos</a></li>
 						<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="#" th:href="@{/chat}">Chat</a></li>
 					</ul>
 					<ul class="navbar-nav navbar-right">
@@ -217,6 +217,13 @@
 			  	        })
 		            }
 		        }
+				
+				
+				$('li').removeClass('active');
+				var URLactual = jQuery(location).attr('href');
+				if(URLactual.indexOf("torneo") > 1) $('#irTorneos').addClass('active');
+				if(URLactual.indexOf("evento") > 1) $('#irEventos').addClass('active');
+				if(URLactual.indexOf("evento") > 1) $('#irUsuarios').addClass('active');
 				
 			});
 			
