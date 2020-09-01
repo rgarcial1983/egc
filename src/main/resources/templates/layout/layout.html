@@ -34,20 +34,22 @@
 						<li class="nav-item"  id="irTorneos"><a class="nav-link" href="#" th:href="@{/torneo/listar}">Torneos</a></li>
 						<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="#" th:href="@{/chat}">Chat</a></li>
 					</ul>
-					<ul class="navbar-nav navbar-right">
-						<li sec:authorize="!isAuthenticated()"><a class="btn btn-outline-warning btn-sm" th:href="@{/login}">Iniciar Sessión</a></li>
+					<ul class="navbar-nav ml-auto nav-flex-icons">
+						<li sec:authorize="!isAuthenticated()">
+							<a class="btn btn-outline-warning btn-sm" th:href="@{/login}">Iniciar Sessión</a>
+						</li>
 
 						<li sec:authorize="isAuthenticated()" class="dropdown show">
 							<a class="btn btn-outline-warning dropdown-toggle btn-sm" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span sec:authentication="name"></span>
 							</a>
 							
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="dropdownMenuLink">
 								<form id="logoutForm" th:action="@{/logout}" method="post">
-									<button class="dropdown-item" onclick="document.getElementById('logoutForm').submit();" type="submit">Sign Out</button>
+									<a class="dropdown-item" onclick="document.getElementById('logoutForm').submit();" type="submit"><strong>Sign Out</strong></a>
 									<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 								</form>
-								<span sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="text-black" href="#" th:href="@{/configuracion}">Configuración</a></span>
+								<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/configuracion}">Configuración</a>
 							</div>
 						</li>
 					</ul>
@@ -223,7 +225,7 @@
 				var URLactual = jQuery(location).attr('href');
 				if(URLactual.indexOf("torneo") > 1) $('#irTorneos').addClass('active');
 				if(URLactual.indexOf("evento") > 1) $('#irEventos').addClass('active');
-				if(URLactual.indexOf("evento") > 1) $('#irUsuarios').addClass('active');
+				if(URLactual.indexOf("usuario") > 1) $('#irUsuarios').addClass('active');
 				
 			});
 			

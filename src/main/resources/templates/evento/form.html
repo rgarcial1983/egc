@@ -54,17 +54,41 @@
 										<i class="fa fa-code prefix grey-text"></i> <input type="text" th:field="*{url}" id="url" class="form-control mb-3"> <label for="defaultForm-text">Url</label>
 									</div>
 									
+									<!-- Elegir fotos o vídeo -->
 									<div class="md-form m-0">
-										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto}" id="foto" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+										<div class="col-md-3 offset-md-3">
+										
+											<!-- Solo video -->
+											<div class="custom-control custom-radio">
+											  <input type="radio" class="custom-control-input" id="soloFoto" name="opcion" value="0" />
+											  <label class="custom-control-label" for="soloFoto">Sólo Fotos</label>
+											</div>
+											
+											<!-- Solo fotos -->
+											<div class="custom-control custom-radio">
+											  <input type="radio" class="custom-control-input" id="soloVideo" name="opcion" checked value="1" />
+											  <label class="custom-control-label" for="soloVideo">Sólo Vídeo</label>
+											</div>
+						                </div>
+						                <br>
 									</div>
-									<div class="md-form m-0">
-										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto2}" id="foto2" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+									
+									<div id="sec-foto" class="d-none">
+										<div class="md-form m-0">
+											<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto}" id="foto" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+										</div>
+										<div class="md-form m-0">
+											<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto2}" id="foto2" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+										</div>
+										<div class="md-form m-0">
+											<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto3}" id="foto3" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
+										</div>
 									</div>
-									<div class="md-form m-0">
-										<i class="fas fa-image prefix grey-text"></i> <input type="text" th:field="*{foto3}" id="foto3" class="form-control mb-3"> <label for="defaultForm-text">Foto</label>
-									</div>
-									<div class="md-form m-0">
-										<i class="fab fa-youtube prefix grey-text"></i> <input type="text" th:field="*{video}" id="video" class="form-control mb-3"> <label for="defaultForm-text">Vídeo (https://www.youtube.com/embed/XXX)</label>
+									
+									<div id="sec-video" class="d-none">
+										<div class="md-form m-0">
+											<i class="fab fa-youtube prefix grey-text"></i> <input type="text" th:field="*{video}" id="video" class="form-control mb-3"> <label for="defaultForm-text">Vídeo (https://www.youtube.com/embed/XXX)</label>
+										</div>
 									</div>
 
 								</div>
@@ -82,8 +106,45 @@
 		</div>
 	</div>
 	
+	
 <footer th:replace="layout/layout :: footer"></footer>
 
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		function obtenerRadioSeleccionado() {
+			var aRadios = document.getElementsByName("opcion");
+	        var radioActivo = null;
+
+	        for(var contador = 0; contador < aRadios.length; contador++) {
+	            if(aRadios[contador].checked == true)
+	                radioActivo = aRadios[contador].value;
+	        }
+	        return radioActivo;
+		}
+		
+		function mostrarFragmento(opcion) {
+			var seccionFoto = document.getElementById("sec-foto");
+			var seccionVideo = document.getElementById("sec-video");
+			
+			if(opcion === "1") {
+				seccionFoto.setAttribute("class", "d-none");
+				seccionVideo.classList.remove("d-none");
+			} else {				
+				seccionFoto.classList.remove("d-none");
+				seccionVideo.setAttribute("class", "d-none");
+			}
+		}
+		
+		// Se invoca al método cuando se carga la página
+        mostrarFragmento(obtenerRadioSeleccionado());
+        
+        // Cuando cambiamos la opción se muestra el fragmento que corresponda
+        $('input[name="opcion"]').on("click", function(e) {
+			mostrarFragmento(obtenerRadioSeleccionado());
+        });
+	});
+	</script>
 	
 </body>
 </html>
