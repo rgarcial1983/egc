@@ -26,8 +26,6 @@
 							<th>Email</th>
 							<th>Cumpleaños</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,14 +36,11 @@
 							<td th:text="${usuario.apellido2}"></td>
 							<td th:text="${usuario.email}"></td>
 							<td th:text="${#dates.format(usuario.fhNacimiento, 'dd/MM/yyyy')}"></td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
-								<a class="btn btn-success btn-sm px-3 btnNuevo" id="btnNuevo" th:href="@{'/usuarioNuevo'}"> <i class="fas fa-user-plus fa-fw"></i></a>
-							</td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')"> 
-								<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw"></i></a>
-							</td>
-							<td sec:authorize="hasRole('ROLE_ADMIN')">
-								<a class="btn btn-danger btn-sm px-3 btnEliminar" th:onclick="eliminarRegistro([[${usuario.id}]])" id="btnEliminar"> <i class="fas fa-user-times fa-fw"></i></a>
+							<td sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">
+								<a class="btn btn-success btn-sm px-3 btnNuevo" id="btnNuevo" th:href="@{'/usuarioNuevo'}"> <i class="fas fa-user-plus fa-fw fa-lg"></i></a>
+								<a class="btn btn-primary btn-sm px-3 btnEditar" th:href="@{/usuario/} + ${usuario.id}"> <i class="fas fa-user-edit fa-fw fa-lg"></i></a>
+								<a class="btn btn-danger btn-sm px-3 btnEliminar" th:onclick="eliminarRegistro([[${usuario.id}]], '¿Desea eliminar el usuario?', 'Esta operación no se puede deshacer', '/usuario/eliminar/', '/usuario/listar')" id="btnEliminar"> <i class="fas fa-user-times fa-fw fa-lg"></i></a>
+								<a class="btn btn-warning btn-sm px-3 btnChangePass" th:href="@{/cambiarClave/} + ${usuario.id}" id="btnChangePass"> <i class="fas fa-user-lock fa-fw fa-lg"></i></a>
 							</td>
 						</tr>
 					</tbody>

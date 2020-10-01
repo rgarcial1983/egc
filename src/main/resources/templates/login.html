@@ -57,33 +57,36 @@
 							</button>
 						</div>
 						<div class="modal-body mx-3">
+							
 							<!--Grid row-->
 							<div class="row">
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{nombre}" id="nombre" class="form-control validate"> <label for="orangeForm-nombre">Nombre</label>
-										<div th:errors="*{nombre}"></div>
 									</div>
+									<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido1}" id="ape1" class="form-control validate"> <label for="orangeForm-ape1">Primer apellido</label>
-										<div th:errors="*{apellido1}"></div>
+										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido1}" id="ape1" class="form-control validate"> <label for="orangeForm-ape1">Primer
+											apellido</label>
 									</div>
+									<div class="alert-danger" th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}"></div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido2}" id="ape2" class="form-control validate"> <label for="orangeForm-ape2">Segundo apellido</label>
+										<i class="fas fa-user prefix grey-text"></i> <input type="text" th:field="*{apellido2}" id="ape2" class="form-control validate"> <label for="orangeForm-ape2">Segundo
+											apellido</label>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-calendar-alt prefix grey-text"></i> <input type="date" th:field="*{fhNacimiento}" id="cumple" class="form-control validate"> <label for="orangeForm-cumple">Cumpleaños</label>
-										<div th:errors="*{fhNacimiento}"></div>
 									</div>
+									<div class="alert-danger" th:if="${#fields.hasErrors('fhNacimiento')}" th:errors="*{fhNacimiento}"></div>
 								</div>
 							</div>
 
@@ -91,27 +94,26 @@
 								<div class="col-md-6">
 									<div class="md-form mb-0">
 										<i class="fas fa-user-ninja prefix grey-text"></i> <input type="text" th:field="*{username}" id="alias" class="form-control validate"> <label for="orangeForm-alias">Nick/Alias</label>
-										<div th:errors="*{username}"></div>
 									</div>
+									<div class="alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-envelope prefix grey-text"></i> <input type="email" th:field="*{email}" id="email" class="form-control validate"> <label for="orangeForm-email">Email</label>
-										<div th:errors="*{email}"></div>
+										<i class="fas fa-envelope prefix grey-text"></i> <input type="text" th:field="*{email}" id="mail" class="form-control validate"> <label for="orangeForm-email">Email</label>
 									</div>
+									<div class="alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-lock prefix grey-text"></i> <input type="password" th:field="*{password}" id="password1" class="form-control validate"> <label for="orangeForm-pass">Password</label>
-										<div th:errors="*{password}"></div>
+										<i class="fas fa-lock prefix grey-text"></i> <input type="password" autocomplete="off" max="60" th:field="*{password}" id="password" name="password" class="form-control validate"> <label for="orangeForm-pass">Password</label>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="md-form mb-0">
-										<i class="fas fa-lock prefix grey-text"></i> <input type="password" id="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
+										<i class="fas fa-lock prefix grey-text"></i> <input type="password" autocomplete="off" max="60" th:value="${password}" id="password2" name="password2" class="form-control validate"> <label for="orangeForm-pass2">Repite Password</label>
 									</div>
 								</div>
 							</div>
@@ -137,7 +139,7 @@
 						  timer: 5000
 						})
 						
-						$("#mularioRegistro").submit();
+						$("#formularioRegistro").submit();
 					});
 				});
 			</script>

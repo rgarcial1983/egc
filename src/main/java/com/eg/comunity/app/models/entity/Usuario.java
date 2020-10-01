@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
 	private Long id;
 
 	@NotEmpty
-	@Column(length = 30, unique = true)
+	@Column(length = 30)
 	private String username;
 
 	@NotEmpty
