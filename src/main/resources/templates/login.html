@@ -128,6 +128,9 @@
 			<script type="text/javascript">
 				$(document).ready(function() {
 					
+					// Para que safari pueda ver el calendario
+					if ( $('#cumple')[0].type != 'date' ) $('#cumple').datepicker();
+					
 					$('#btnNuevoUsuario').on('click', function(e) {
 						
 						if(validarFormularioUsuario()) {							
@@ -144,8 +147,9 @@
 					});
 					
 					
+					
 					function validarFormularioUsuario() {
-						let todoOk = false;
+						let todoOk = true;
 						return todoOk;
 					}
 				});

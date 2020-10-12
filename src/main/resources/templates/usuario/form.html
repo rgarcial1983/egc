@@ -114,6 +114,9 @@
 				document.getElementById("cumple").value = "";
 				document.getElementById("alias").value = "";
 			});
+			
+			// Para que safari pueda ver el calendario
+			if ( $('#cumple')[0].type != 'date' ) $('#cumple').datepicker();
 		});
 	
 	</script>
